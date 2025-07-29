@@ -35,13 +35,29 @@ public class ContaTerminal {
         var scanner = new Scanner(System.in);
 
         System.out.println("Por favor, digite o número da Agência!: ");
-        int num = scanner.nextInt();
+        String agenciaDigitada = scanner.nextLine();
 
-        Clientes cliente01 = new Clientes (num, "067-8","Mario Andrade", 237.48f);
+        Clientes[] clientes = new Clientes[2];
+        clientes[0] = new Clientes(1234, "067-8", "Mario Andrade", 237.48f);
+        clientes[1] = new Clientes (1021, "072-1","Rodrigo Alves", 12237.48f);
+       
+        boolean achou = false;
 
-        System.out.println("Olá "+ cliente01.NomeCliente + ", obrigado por criar uma conta em nosso banco, sua agência é: "+cliente01.Agencia+ ", conta "+cliente01.NumeroConta+ " e seu saldo "+cliente01.Saldo+ " já está disponível para saque.");
+        for (Clientes c : clientes) {
+
+            if (c.Agencia.equals(agenciaDigitada)) {
+                System.out.println("Olá " + c.NomeCliente + ", obrigado por criar uma conta em nosso banco, sua agência é: " 
+                + c.Agencia + ", conta " + c.NumeroConta + " e seu saldo " + c.Saldo + " já está disponível para saque.");
+                achou = true;
+
+                break; 
+            }
+        }
+
+        if (!achou) {
+            System.out.println("Nenhum cliente encontrado para a agência: " + agenciaDigitada);
+        }
 
         scanner.close();
-    
     }
 }
